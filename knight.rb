@@ -12,69 +12,58 @@ class Knight
     coords[0].between?(0, 7) && coords[1].between?(0, 7)
   end
 
-  def move_up_left
-    new_coords = [@coords[0] - 1, @coords[1] + 2]
-    @coords = new_coords if inside_board?(new_coords) 
-  end
+  def move(forward, side)
+    new_coords = [nil,nil]
+    case forward
+    when "up"
+      new_coords[1] = @coords[1] + 2
+    when "right"
+      new_coords[0] = @coords[0] + 2
+    when "down"
+      new_coords[1] = @coords[1] - 2
+    when "left"
+      new_coords[0] = @coords[0] - 2
+    else
+      puts 'Invalid side'
+    end
 
-  def move_up_right
-    new_coords = [@coords[0] + 1, @coords[1] + 2]
+    case side
+    when "up"
+      new_coords[1] = @coords[1] + 1
+    when "right"
+      new_coords[0] = @coords[0] + 1
+    when "down"
+      new_coords[1] = @coords[1] - 1
+    when "left"
+      new_coords[0] = @coords[0] - 1
+    else
+      puts 'Invalid side'
+    end
     @coords = new_coords if inside_board?(new_coords) 
   end
-
-  def move_right_up
-    new_coords = [@coords[0] + 2, @coords[1] + 1]
-    @coords = new_coords if inside_board?(new_coords) 
-  end
-
-  def move_right_down
-    new_coords = [@coords[0] + 2, @coords[1] - 1]
-    @coords = new_coords if inside_board?(new_coords) 
-  end
-
-  def move_down_right
-    new_coords = [@coords[0] + 1, @coords[1] - 2]
-    @coords = new_coords if inside_board?(new_coords) 
-  end
-
-  def move_down_left
-    new_coords = [@coords[0] - 1, @coords[1] - 2]
-    @coords = new_coords if inside_board?(new_coords) 
-  end
-
-  def move_left_down
-    new_coords = [@coords[0] - 2, @coords[1] - 1]
-    @coords = new_coords if inside_board?(new_coords) 
-  end
-
-  def move_left_up
-    new_coords = [@coords[0] - 2, @coords[1] + 1]
-    @coords = new_coords if inside_board?(new_coords) 
-  end
-end
 
 knight = Knight.new [4,4]
 p knight.coords
-knight.move_up_left
+knight.move("up","left")
 p knight.coords
 knight.coords = [4,4]
-knight.move_up_right
+knight.move("up","right")
 p knight.coords
 knight.coords = [4,4]
-knight.move_right_up
+knight.move("right","up")
 p knight.coords
 knight.coords = [4,4]
-knight.move_right_down
+knight.move("right","down")
 p knight.coords
 knight.coords = [4,4]
-knight.move_down_right
+knight.move("down","right")
 p knight.coords
 knight.coords = [4,4]
-knight.move_down_left
+knight.move("down","left")
 p knight.coords
 knight.coords = [4,4]
-knight.move_left_down
+knight.move("left","down")
 p knight.coords
 knight.coords = [4,4]
-knight.move_left_up
+knight.move("left","up")
 p knight.coords

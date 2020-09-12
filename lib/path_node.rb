@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'ap'
+# require 'ap'
 require 'pry'
 
 class PathNode
@@ -18,14 +18,14 @@ class PathNode
     @leftup = nil
   end
 
-  def get_next_nodes
-    #Returns an array with nodes of all possible next coordinates
-    instance_variables.reduce([]) do |arr, attribute|
-      next arr if attribute == :@coords || attribute == :@backtrace
-      next_node = instance_variable_get(attribute)
-      next_node.nil? ? arr : arr << PathNode.new(next_node.coords)#, self)
-    end
-  end
+  #def get_next_nodes
+  #  #Returns an array with nodes of all possible next coordinates
+  #  instance_variables.reduce([]) do |arr, attribute|
+  #    next arr if attribute == :@coords || attribute == :@backtrace
+  #    next_node = instance_variable_get(attribute)
+  #    next_node.nil? ? arr : arr << PathNode.new(next_node.coords)#, self)
+  #  end
+  #end
 
   def to_s
     "Own Coords: #{@coords}

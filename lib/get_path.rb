@@ -3,7 +3,6 @@
 require_relative 'path_node.rb'
 require_relative 'knight.rb'
 require 'pry'
-#require 'ap'
 
 class GetPath
   include Movements
@@ -25,12 +24,9 @@ class GetPath
       puts 'Invalid coordinates!'
       return
     end
-    @start_node = PathNode.new(@start) # , 'head')
+    @start_node = PathNode.new(@start, 'head')
     build_tree
-    binding.pry
-    puts "xxx"
-    # p backtrace_target
-    # p search_level_order
+    p backtrace_target
   end
 
   def valid?(start, target)
@@ -42,9 +38,9 @@ class GetPath
   def build_tree
     queue = [@start_node]
     until queue.empty?
-      node = queue.shift 
+      node = queue.shift
       # puts "Queuesize: #{queue.size}"
-      break if node.coords == @target 
+      break if node.coords == @target
       next if @visited.include?(node.coords)
       @visited << node.coords
       @test_counter += 1
@@ -52,10 +48,12 @@ class GetPath
       get_next_movements(node)
       node.instance_variables.each do |attr|
         cur_node = node.instance_variable_get(attr)
-        next if attr == :@coords ||  cur_node == nil
-        queue << cur_node 
+        next if attr == :@coords || attr == :@backtrace
+
+        queue << cur_node unless cur_node.nil?
       end
     end
+    @target_node = node
   end
 
   def get_next_movements(node)
@@ -70,32 +68,16 @@ class GetPath
   end
 
   def backtrace_target(node = @target_node, path = [])
-    return path if node == @start
+    return path if node == 'head'
 
     path << node.coords
     backtrace_target(node.backtrace, path)
   end
 
-  # def search_level_order
-  #   queue = [@start_node]
-  #   path = []
-  #   until queue.empty? || queue.first.coords == @target_node.coords
-  #     binding.pry
-  #     node = queue.shift
-  #     node.instance_variables.each do |attribute|
-  #       next if attribute == :@coords
-
-  #       next_node = node.instance_variable_get(attribute)
-  #       queue << next_node unless next_node.nil?
-  #     end
-  #     path << node.coords
-  #   end
-  #   path << @target_node.coords
-  # end
  end
 
 x = GetPath.new
-x.knight_moves([0, 0], [3,6])
+x.knight_moves([3, 3], [7, 7])
 # y = PathNode.new([0,0])
 # x.get_next_movements(y)
 # binding.pry

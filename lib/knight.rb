@@ -34,7 +34,6 @@ module Movements
       puts 'Invalid step to side'
       return
     end
-    inside_board?(new_coords) ? PathNode.new(new_coords) : nil #, "backtrc wip") : nil
+    inside_board?(new_coords) ? PathNode.new(new_coords, node) : nil
   end
 end
-

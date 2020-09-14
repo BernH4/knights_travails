@@ -2,7 +2,6 @@
 
 require_relative 'path_node.rb'
 require_relative 'knight.rb'
-require 'pry'
 
 class GetPath
   include Movements
@@ -26,7 +25,7 @@ class GetPath
     end
     @start_node = PathNode.new(@start, 'head')
     build_tree
-    p backtrace_target
+    p backtrace_target.reverse
   end
 
   def valid?(start, target)
@@ -36,16 +35,14 @@ class GetPath
   end
 
   def build_tree
+    #generating the tree using level order
     queue = [@start_node]
     until queue.empty?
       node = queue.shift
-      # puts "Queuesize: #{queue.size}"
-      break if node.coords == @target
       next if @visited.include?(node.coords)
+      break if node.coords == @target
       @visited << node.coords
-      @test_counter += 1
-      puts @test_counter if @test_counter % 10 == 0
-      get_next_movements(node)
+      get_next_movements!(node)
       node.instance_variables.each do |attr|
         cur_node = node.instance_variable_get(attr)
         next if attr == :@coords || attr == :@backtrace
@@ -56,7 +53,7 @@ class GetPath
     @target_node = node
   end
 
-  def get_next_movements(node)
+  def get_next_movements!(node)
     node.upleft = move(node, 'up', 'left')
     node.upright = move(node, 'up', 'right')
     node.rightup = move(node, 'right', 'up')
@@ -78,7 +75,3 @@ class GetPath
 
 x = GetPath.new
 x.knight_moves([3, 3], [7, 7])
-# y = PathNode.new([0,0])
-# x.get_next_movements(y)
-# binding.pry
-# pp y

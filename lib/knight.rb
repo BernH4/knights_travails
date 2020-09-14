@@ -1,13 +1,6 @@
 # frozen_string_literal: true
 
-require 'pry'
-
 module Movements
-  # attr_accessor :coords
-  # def initialize(coords = [0, 0])
-  #   @coords = coords
-  # end
-
   def inside_board?(coords)
     coords[0].between?(0, 7) && coords[1].between?(0, 7)
   end

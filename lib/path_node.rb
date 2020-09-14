@@ -3,7 +3,6 @@
 class PathNode
   attr_accessor :coords, :backtrace, :upleft, :upright, :rightup, :rightdown, :downleft, :downright, :leftdown, :leftup
   def initialize(coords, backtrace)
-    # puts backtrace
     @coords = coords
     @backtrace = backtrace
     @upleft = nil

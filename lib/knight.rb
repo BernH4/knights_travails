@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry'
-
 module Movements
   # attr_accessor :coords
   # def initialize(coords = [0, 0])

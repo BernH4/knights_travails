@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-# require 'ap'
-require 'pry'
-
 class PathNode
   attr_accessor :coords, :backtrace, :upleft, :upright, :rightup, :rightdown, :downleft, :downright, :leftdown, :leftup
   def initialize(coords, backtrace)

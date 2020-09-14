@@ -2,7 +2,6 @@
 
 require_relative 'path_node.rb'
 require_relative 'knight.rb'
-require 'pry'
 
 class GetPath
   include Movements

@@ -3,7 +3,6 @@
 class PathNode
   attr_accessor :coords, :backtrace, :upleft, :upright, :rightup, :rightdown, :downleft, :downright, :leftdown, :leftup
   def initialize(coords, backtrace)
-    # puts backtrace
     @coords = coords
     @backtrace = backtrace
     @upleft = nil
@@ -26,12 +25,6 @@ class PathNode
   # end
 
   def to_s
-    "Own Coords: #{@coords}
-     up:    #{@up}
-     right: #{@right}
-     down:  #{@down}
-     left:  #{@left}"
+    "Own Coords: #{@coords}"
   end
 end
-
-# x = PathNode.new([0, 0])
